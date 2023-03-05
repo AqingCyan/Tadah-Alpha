@@ -13,12 +13,11 @@ export class ChatGptService implements OnModuleInit {
   }
 
   async handleAskQuestion(question: string) {
-    const completion = await this.openai.createCompletion({
-      model: 'gpt-3.5-turbo-0301',
-      prompt: [{ role: 'user', content: question }],
-      temperature: 0.6,
+    const completion = await this.openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: question }],
     });
     console.log(completion);
-    return 'Hello World!';
+    return completion.data.choices[0];
   }
 }
